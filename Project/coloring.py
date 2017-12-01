@@ -4,7 +4,7 @@ def is_proper(graph,color):
 			if color[adj] == color[vert]:
 				return False
 	return True
-
+ 
 def three_color(graph):
 	print (len(graph))
 	temp = []
