@@ -4,7 +4,7 @@ def is_proper(graph,color):
 			if color[adj] == color[vert]:
 				return False
 	return True
- 
+
 def three_color(graph):
 	print (len(graph))
 	temp = []
@@ -14,7 +14,7 @@ def three_color(graph):
 	print (temp[1])
 	tempa = [[x,y,z] for x in [1,2,3] for y in [1,2,3] for z in [1,2,3]]
 	print(tempa)
-
+ 
 if __name__ == "__main__":
 	graphEmpty = {}
 	grapha = {"A" : ["B", "C"], "B" : ["A", "C"], "C" : ["A", "B"]}
