@@ -29,24 +29,28 @@ def is_three_color(graph):
 	else: return False
 
 def is_proper_edge(graph):
-	return
+	for vert in graph:
+		for edge in graph[vert]:
+			for l in graph[edge[0]]:
+				if l[0] != vert and l[1] == edge[1]:
+					return False
+	return True
 
 if __name__ == "__main__":
 	graphEmpty = {}
 	grapha = {"A" : ["B", "C"], "B" : ["A", "C"], "C" : ["A", "B"]}
 	colora = {"A" : 1, "B" : 2, "C" : 3}
 	colorb = {"A" : 1, "B" : 1, "C" : 3}
+
 	boola = is_proper(grapha, colora)
 	boolb = is_proper(grapha, colorb)
-	print (boola, boolb)
+	print ("Is_proper: " , boola, boolb)
+
 	graphb = {"A":["B"],"B":["C"],"C":["A"]}
-	print(three_color(graphb))
+	print("Three color: " , three_color(graphb))
+
 	graphc = {"A":["B"],"B":["C"],"C":["A"], "D":["A","B","C"]}
-	print(is_three_color(graphc))
+	print("Is_three_color: " , is_three_color(graphc))
 
 	g = {"A" : [["B", 1], ["C", 2]], "B" : [["A", 1], ["C", 3]],"C" : [["A", 2], ["B", 3]]}
-
-	for x in g:
-		print (x)
-		print (g[x])
-		print (g[x][1][1])
+	print("Is proper edge: " , is_proper_edge(g))
