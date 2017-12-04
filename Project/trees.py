@@ -34,6 +34,17 @@ def BFS(tree,level=["A"]):
         bfs_list += BFS(tree,sub_level)
     return bfs_list
 
-tree = {"A":["C", "D"], "C" : ["P","R","L"],"R" : ["O","E"],"P" : [], "L" : [], "N" : [], "M" : [], "H" : [], "S" : [], "F" : [], "O" : [], "E": [], "G" : ["N", "M"], "Q" : ["G", "H"], "D" : ["F", "Q", "S"]}
-print(BFS(tree))
+
+#            ___A___
+#           /       \
+#          C         D
+#        / | \     / | \
+#       P  R  L   F  Q  S
+#         / \       / \
+#        O   E     G   H
+#                 / \
+#                N   M
 #
+#tree = {"A":["C", "D"], "C" : ["P","R","L"],"R" : ["O","E"],"P" : [], "L" : [], "N" : [], "M" : [], "H" : [], "S" : [], "F" : [], "O" : [], "E": [], "G" : ["N", "M"], "Q" : ["G", "H"], "D" : ["F", "Q", "S"]}
+#print(BFS(tree))
+#A,C,D,P,R,L,F,Q,S,O,E,G,H,N,M
