@@ -9,20 +9,59 @@ def power(inlist):
 
 #print (power(test2))
 
-
-
 def partite_sets(graph):
-    temp_dic = []
-    temp_dic2 =[]
+    left = []
+    right =[]
+    for a in graph:
+        left+= a
+        break
     for x in graph:
-        for y in graph:
-            if graph[x] == graph[y] and x != y:
-                temp_dic.append(x)
-                temp_dic.append(y)
-                print (temp_dic)
-                break
+        if x in left:
+            for y in graph[x]:
+                if y not in right:
+                    right += y
+        else:
+            for i in graph[x]:
+                if i not in left:
+                    left += i
+
+    final = []
+    final.append(left)
+    final.append(right)
+
+    return final
 
 
 
+#print (partite_sets({"A" : ["B", "C"], "B" : ["A","C"], "C" : ["A","B"]}))
+#print (partite_sets({"A": ["E","C"] , "B":["E","C"], "C": ["B","A"], "D":["E"], "E":["D","B","A"]}))
 
-partite_sets({"A" : ["B", "C"], "B" : ["A"], "C" : ["A"]})
+
+def is_perfect(graph):
+    graphT = partite_sets(graph)
+    left = graphT[0]
+    right = graphT[1]
+    for a in graph:
+        if a in left:
+            if graph[a] != right:
+                return False
+        else:
+            if graph[a]!= left:
+                return False
+
+    return True
+
+
+#print (is_perfect(({"A" : ["B", "C"], "B" : ["A","D"], "C" : ["A", "D"], "D" : ["B", "C"]})))
+
+def is_bipartite(graph):
+    graphT = partite_sets(graph)
+    left = graphT[0]
+    right = graphT[1]
+    for a in left:
+        if a in right:
+            return False
+
+    return True
+
+print (is_bipartite({"A" : ["B", "C"], "B" : ["A"], "C" : ["A"]}))
