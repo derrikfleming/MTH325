@@ -28,3 +28,32 @@ def is_same(list1, list2):
 #list1 = ["A", "B", "C"]
 #list2 = ["D", "E", "F"]
 #print(is_same(list1,list2)) #False
+
+def switch(graph,vert1,vert2):
+    temp_g = graph
+    for x in list(temp_g):
+
+        for y in temp_g[x]:
+            if y == vert2:
+                ind = temp_g[x].index(vert2)
+                temp_g[x].remove(vert2)
+                temp_g[x].insert(ind,vert1)
+
+            elif y == vert1:
+                ind = temp_g[x].index(vert1)
+                temp_g[x].remove(vert1)
+                temp_g[x].insert(ind,vert2)
+
+
+    x1 = temp_g[vert1]
+    x2 = temp_g[vert2]
+    for i in temp_g:
+        if i == vert1:
+            temp_g[vert2] = x1
+        elif i == vert2:
+            temp_g[vert1] = x2
+
+    return temp_g
+
+
+print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
