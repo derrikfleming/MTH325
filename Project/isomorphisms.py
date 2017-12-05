@@ -31,6 +31,8 @@ def is_same(list1, list2):
 
 def switch(graph,vert1,vert2):
     temp_g = graph
+
+
     for x in list(temp_g):
 
         for y in temp_g[x]:
@@ -52,6 +54,7 @@ def switch(graph,vert1,vert2):
             temp_g[vert2] = x1
         elif i == vert2:
             temp_g[vert1] = x2
+
 
     return temp_g
 
