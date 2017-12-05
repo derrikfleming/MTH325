@@ -64,19 +64,24 @@ def is_same(list1, list2):
 def edge_get(graph):
     edge_list = []
     weights = []
+
     for node in graph:
         for adj_edge in graph[node]:
+            #the current edge
             curr_edge = [node, adj_edge[0]]
+            #edge_list empty, ie first iteration
             if len(edge_list) < 1:
                 edge_list.append(curr_edge)
                 weights.append(adj_edge[1])
             else:
                 in_list = False
+                #check edge_list for curr_edge's existance
                 for i in edge_list:
                     if is_same(i,curr_edge):
                         in_list = True
                         break
                 if not in_list:
+                    #sort edge_list while building
                     for i in range(len(edge_list)):
                         if weights[i] >= adj_edge[1]:
                             edge_list.insert(i,curr_edge)
@@ -95,6 +100,5 @@ def edge_get(graph):
 #       C
 #
 #
-tree = {"A" : [["B", 10], ["D", 5]], "B" : [["A", 10], ["C",5]], "C" : [["B", 5], ["D", 15]], "D" : [["C", 15], ["A", 5]]}
-
-print(edge_get(tree))
+#tree = {"A" : [["B", 10], ["D", 5]], "B" : [["A", 10], ["C",5]], "C" : [["B", 5], ["D", 15]], "D" : [["C", 15], ["A", 5]]}
+#print(edge_get(tree))
