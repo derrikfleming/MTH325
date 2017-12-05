@@ -59,4 +59,21 @@ def switch(graph,vert1,vert2):
     return temp_g
 
 
-print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
+#print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
+
+
+
+def list_perm(list):
+
+    help_perm(list,0)
+
+def help_perm(list, step = 0):
+    if step == len(list):
+        print "".join(list)
+
+    for i in range(step, len(list)):
+
+        lst_temp= [character for character in list]
+        lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
+        help_perm(lst_temp, step + 1)
+list_perm(["A","B","C"])
