@@ -26,9 +26,9 @@ def DFS(tree,vertex="A"):
 
 def BFS(tree,level=["A"]):
     bfs_list = []
-    sub_level = []
     if len(level) > 0:
         bfs_list += level
+        sub_level = []
         for vertex in level:
             sub_level += tree[vertex]
         bfs_list += BFS(tree,sub_level)
@@ -45,6 +45,56 @@ def BFS(tree,level=["A"]):
 #                 / \
 #                N   M
 #
-#tree = {"A":["C", "D"], "C" : ["P","R","L"],"R" : ["O","E"],"P" : [], "L" : [], "N" : [], "M" : [], "H" : [], "S" : [], "F" : [], "O" : [], "E": [], "G" : ["N", "M"], "Q" : ["G", "H"], "D" : ["F", "Q", "S"]}
+#tree = {"A" : ["C", "D"], "C" : ["P","R","L"],"R" : ["O","E"],"P" : [], "L" : [], "N" : [], "M" : [], "H" : [], "S" : [], "F" : [], "O" : [], "E": [], "G" : ["N", "M"], "Q" : ["G", "H"], "D" : ["F", "Q", "S"]}
 #print(BFS(tree))
 #A,C,D,P,R,L,F,Q,S,O,E,G,H,N,M
+
+#from isomorphisms
+def is_same(list1, list2):
+    is_same = True
+
+    if len(list1) == len(list2):
+        for item in list1:
+            if item not in list2:
+                is_same = False
+    else:
+        is_same = False
+    return is_same
+
+def edge_get(graph):
+    edge_list = []
+    weights = []
+    for node in graph:
+        for adj_edge in graph[node]:
+            curr_edge = [node, adj_edge[0]]
+            if len(edge_list) < 1:
+                edge_list.append(curr_edge)
+                weights.append(adj_edge[1])
+            else:
+                in_list = False
+                for i in edge_list:
+                    if is_same(i,curr_edge):
+                        in_list = True
+                        break
+                if not in_list:
+                    for i in range(len(edge_list)):
+                        if weights[i] >= adj_edge[1]:
+                            edge_list.insert(i,curr_edge)
+                            weights.insert(i,adj_edge[1])
+                            break
+                        if i == len(edge_list)-1:
+                            edge_list.append(curr_edge)
+                            weights.append(adj_edge[1])
+    return edge_list
+
+#
+#           A
+#      10  / \  5
+#         B   D
+#     5  /___/  15
+#       C
+#
+#
+tree = {"A" : [["B", 10], ["D", 5]], "B" : [["A", 10], ["C",5]], "C" : [["B", 5], ["D", 15]], "D" : [["C", 15], ["A", 5]]}
+
+print(edge_get(tree))
