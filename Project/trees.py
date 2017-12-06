@@ -117,19 +117,24 @@ def edge_get(graph):
 #     return cycle
 
 def is_cycle(temp_graph, original, current, prev, visited):
+    result = False
+
     if len(temp_graph[current]) == 1:
-        return False
+        result = False
     else:
         visited.append(current)
         for x in temp_graph[current]:
             if x == original and x != prev:
-                return True
+                result = True
             else:
                 if x not in visited:
-                    is_cycle(temp_graph, original, x, current, visited)
+                    result = is_cycle(temp_graph, original, x, current, visited)
+            if result is True:
+                break
+    return result
 
 
-print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["A","C"]}, "A", "A", "A",[]))
+print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D"]}, "A", "A", "A",[]))
 
 # def min_kruskal(graph):
 #     kruskal_mst = []
