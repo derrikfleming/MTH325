@@ -63,11 +63,7 @@ def switch(graph,vert1,vert2):
 
 
 
-def list_perm(list):
-
-    help_perm(list,0)
-
-def help_perm(list, step = 0):
+def list_perm(list,step = 0):
     if step == len(list):
         print "".join(list)
 
@@ -75,5 +71,5 @@ def help_perm(list, step = 0):
 
         lst_temp= [character for character in list]
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
-        help_perm(lst_temp, step + 1)
+        list_perm(lst_temp, step + 1)
 list_perm(["A","B","C"])
