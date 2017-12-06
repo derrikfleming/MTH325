@@ -1,4 +1,5 @@
 def DFS(tree,vertex="A"):
+
     dfs_list = []
 
     #if vertex has not been visited
@@ -134,19 +135,25 @@ def is_cycle(temp_graph, original, current, prev, visited):
     return result
 
 
-print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D"]}, "A", "A", "A",[]))
+print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D","A"]}, "A", "A", "A",[]))
 
-# def min_kruskal(graph):
-#     kruskal_mst = []
-#     temp_graph = {}
-#     kruskel_g = edge_get(graph)
-#     for edge in kruskel_g:
-#         if !is_cycle(temp_graph, edge):
-#             temp_graph[edge[0]] += edge[1]
-#             temp_graph[edge[1]] += edge[0]
-#             kruskal_mst.append(edge)
-#     return kruskal_mst
-#
+from copy import deepcopy
+def min_kruskal(graph):
+    kruskal_mst = []
+    temp_graph = {}
+    temp_graph2 = {}
+    kruskel_g = edge_get(graph)
+    for edge in kruskel_g:
+        temp_graph2[edge[0]] += edge[1]
+        temp_graph2[edge[1]] += edge[0]
+        if !is_cycle(temp_graph2, edge[0], edge[0], edge[0], []):
+            temp_graph[edge[0]] += edge[1]
+            temp_graph[edge[1]] += edge[0]
+            kruskal_mst.append(edge)
+        else:
+            temp_graph2 = copy.deepcopy(temp_graph)
+    return kruskal_mst
+
 # def min_prim(graph):
 #     prim_mst = []
 #     edge_list = edge_get(graph)
@@ -163,3 +170,4 @@ print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":
 #     return prim_mst
 
 tree = {"A":[["B", 10], ["D",5]], "B":[["A",10], ["C",5]], "C":[["B",5], ["D",15]], "D":[["C",15], ["A",5]]}
+print(min_kruskal(tree))
