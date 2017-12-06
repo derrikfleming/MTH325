@@ -31,6 +31,7 @@ def is_same(list1, list2):
 
 def switch(graph,vert1,vert2):
     temp_g = graph
+    print(graph)
 
 
     for x in list(temp_g):
@@ -59,13 +60,13 @@ def switch(graph,vert1,vert2):
     return temp_g
 
 
-#print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
+print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
 
 
 
 def list_perm(list,step = 0):
     if step == len(list):
-        print "".join(list)
+        print ("".join(list))
 
     for i in range(step, len(list)):
 

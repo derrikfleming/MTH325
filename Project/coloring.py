@@ -59,22 +59,16 @@ def greedy(graph,order):
 		break
 	for vert in order:
 		check = False
+		color[vert] = 1
 		while(check != True):
-			print("1")
 			for x in graph[vert]:
-				print("2")
-				if x not in color:
-					print("3")
-					break
-				else:
-					print("4")
+				if x in color:
 					if color[x] == color[vert]:
 						color[vert] += 1
 			else:
-				print("5")
 				check = True
 	print ("COLOR", color)
 
-ga = {"A":["B", "C"],"B":["A"],"C":["A"]}
-order = ["A","B","C"]
+ga = {"A":["B"],"B":["A", "C"],"C":["B","D"], "D":["C"]}
+order = ["A","D","B","C"]
 greedy(ga,order)
