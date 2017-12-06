@@ -1,5 +1,25 @@
 def DFS(tree,vertex="A"):
+    """
+    This method provides a recursive DFS traversal of the tree
+    parameter passed in. It maintains a list of each parent and
+    child vertice which is returned to each parent via the
+    recursive call.
 
+        Parameters:
+        --------------
+        tree : dictionary
+            The tree parameter is a dictionary with each key having a
+            value of its child vertices associated with it
+        vertex : string
+            The vertex parameter hold the current parent relative to
+            the recursive call. It is "A" by default as that is the
+            specified starting point per Prof Santana
+
+        Returns:
+        --------------
+        list
+            A list of strings representing each vertex in DFS order.
+    """
     dfs_list = []
 
     #if vertex has not been visited
@@ -12,6 +32,7 @@ def DFS(tree,vertex="A"):
 
     return dfs_list
 
+# A TEST CASE
 #           A
 #         / | \
 #        B  C  D
@@ -26,7 +47,32 @@ def DFS(tree,vertex="A"):
 #A,B,E,F,I,J,K,C,G,D,H
 
 def BFS(tree,level=["A"]):
+    """
+    This method provides a BFS traversal of the tree parameter
+    passed in. It maintains a list of strings representative of
+    each vertex in the tree. For each "level" of the tree it makes
+    a recursive call passing in each vertex contained within the
+    "sub-level", (or a list of all of the children of each vertex
+    in "level").
+
+        Parameters:
+        --------------
+        tree : dictionary
+            The tree parameter is a dictionary with each key having a
+            value of its child vertices associated with it
+        level : list
+            The level parameter is a list of strings representative of
+            each vertex in a specific "level" of the tree
+
+        Returns:
+        --------------
+        list
+            A list of strings representative of the each vertex of the
+            tree traversed in BFS order
+    """
+
     bfs_list = []
+
     if len(level) > 0:
         bfs_list += level
         sub_level = []
@@ -35,7 +81,7 @@ def BFS(tree,level=["A"]):
         bfs_list += BFS(tree,sub_level)
     return bfs_list
 
-
+# A TEST CASE
 #            ___A___
 #           /       \
 #          C         D
@@ -63,6 +109,24 @@ def is_same(list1, list2):
     return is_same
 
 def edge_get(graph):
+    """
+    This method returns a list of lists representative of vertex pairs
+    (strings) in non-decreasing order. For each key in the dictionary,
+    every value is evaluated. If the pair (key,value) already appears
+    in edge_list it is ignored, if not it is inserted by comparing it's
+    edge weight with the others contained in the list via weights[].
+
+        Parameters:
+        --------------
+        graph : dictionary
+            A dictionary with a list of lists that contain a vertex (string) and a edge weight (int)
+
+        Returns:
+        --------------
+        list
+            A list of strings representative of the each vertex of the
+            tree traversed in BFS order
+    """
     edge_list = []
     weights = []
 
