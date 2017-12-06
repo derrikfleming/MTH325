@@ -73,4 +73,4 @@ def list_perm(list,step = 0):
         lst_temp= [character for character in list]
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
         list_perm(lst_temp, step + 1)
-list_perm(["A","B","C"])
+#list_perm(["A","B","C"])
