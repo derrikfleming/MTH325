@@ -104,18 +104,32 @@ def edge_get(graph):
 #print(edge_get(tree))
 
 #NOT WORKING!
-def is_cycle(temp_graph,original_vertex, current, prev):
-    cycle = False
-    for edge in temp_graph:
-        if edge == current:
-            for vertex in edge:
-                if vertex == original_vertex and vertex != prev:
-                    print ("cycle")
-                    return True
-                else:
-                    cycle = cycle or is_cycle(temp_graph, original_vertex, vertex, edge)
-    return cycle
-print(is_cycle({"A":["B"], "B":["A","C"], "C":["B","D"],"D":["C"]}, "A", "A", "A"))
+# def is_cycle(temp_graph,original_vertex, current, prev):
+#     cycle = False
+#     for edge in temp_graph:
+#         if edge == current:
+#             for vertex in edge:
+#                 if vertex == original_vertex and vertex != prev:
+#                     print ("cycle")
+#                     return True
+#                 else:
+#                     cycle = cycle or is_cycle(temp_graph, original_vertex, vertex, edge)
+#     return cycle
+
+def is_cycle(temp_graph, original, current, prev, visited):
+    if len(temp_graph[current]) == 1:
+        return False
+    else:
+        visited.append(current)
+        for x in temp_graph[current]:
+            if x == original and x != prev:
+                return True
+            else:
+                if x not in visited:
+                    is_cycle(temp_graph, original, x, current, visited)
+
+
+print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["A","C"]}, "A", "A", "A",[]))
 
 # def min_kruskal(graph):
 #     kruskal_mst = []
