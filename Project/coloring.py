@@ -69,6 +69,6 @@ def greedy(graph,order):
 				check = True
 	print ("COLOR", color)
 
-ga = {"A":["B"],"B":["A", "C"],"C":["B","D"], "D":["C"]}
-order = ["A","D","B","C"]
+ga = {"A":["B","C"],"B":["A", "C"],"C":["B","D","C"], "D":["C"]}
+order = ["A","B","C","D"]
 greedy(ga,order)

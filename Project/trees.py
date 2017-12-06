@@ -144,14 +144,15 @@ def min_kruskal(graph):
     temp_graph2 = {}
     kruskel_g = edge_get(graph)
     for edge in kruskel_g:
-        temp_graph2[edge[0]] += edge[1]
-        temp_graph2[edge[1]] += edge[0]
-        if !is_cycle(temp_graph2, edge[0], edge[0], edge[0], []):
-            temp_graph[edge[0]] += edge[1]
-            temp_graph[edge[1]] += edge[0]
+        e1 = edge[1]
+        e0 = edge[0]
+        temp_graph2[e0].append(e1)
+        temp_graph2[e1].append(e0)
+        if is_cycle(temp_graph2, edge[0], edge[0], edge[0], []) == False:
+            temp_graph = deepcopy(edge)
             kruskal_mst.append(edge)
         else:
-            temp_graph2 = copy.deepcopy(temp_graph)
+            temp_graph2 = deepcopy(temp_graph)
     return kruskal_mst
 
 # def min_prim(graph):
