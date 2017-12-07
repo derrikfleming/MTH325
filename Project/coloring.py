@@ -33,21 +33,25 @@ print("Three color: " , three_color(graphb))
 
 def is_three_color(graph):
 	combinations = three_color(graph)
+	result = False
+
 	for poss in combinations:
 		if is_proper(graph,poss):
-			return True
-	else: return False
+			result = True
+	return result
 
 graphc = {"A":["B","C","D"],"B":["A","C","D"],"C":["A","B","D"], "D":["A","B","C"]}
 print("Is_three_color: " , is_three_color(graphc))
 
 def is_proper_edge(graph):
+	result = True
+
 	for vert in graph:
 		for edge in graph[vert]:
 			for l in graph[edge[0]]:
 				if l[0] != vert and l[1] == edge[1]:
-					return False
-	return True
+					result = False
+	return result
 
 g = {"A" : [["B", 1], ["C", 2]], "B" : [["A", 1], ["C", 3]],"C" : [["A", 2], ["B", 3]]}
 print("Is proper edge: " , is_proper_edge(g))

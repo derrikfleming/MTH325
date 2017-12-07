@@ -41,15 +41,17 @@ def is_perfect(graph):
     graphT = partite_sets(graph)
     left = graphT[0]
     right = graphT[1]
+    result = True
+
     for a in graph:
         if a in left:
             if graph[a] != right:
-                return False
+                result = False
         else:
-            if graph[a]!= left:
-                return False
+            if graph[a] != left:
+                result = False
 
-    return True
+    return result
 
 
 #print (is_perfect(({"A" : ["B", "C"], "B" : ["A","D"], "C" : ["A", "D"], "D" : ["B", "C"]})))
@@ -58,10 +60,12 @@ def is_bipartite(graph):
     graphT = partite_sets(graph)
     left = graphT[0]
     right = graphT[1]
+    result = True
+
     for a in left:
         if a in right:
-            return False
+            result = False
 
-    return True
+    return result
 
 print (is_bipartite({"A" : ["B", "C"], "B" : ["A"], "C" : ["A"]}))

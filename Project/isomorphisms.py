@@ -32,29 +32,25 @@ def is_same(list1, list2):
 def switch(graph,vert1,vert2):
     temp_g = graph
 
-
     for x in list(temp_g):
-
         for y in temp_g[x]:
             if y == vert2:
                 ind = temp_g[x].index(vert2)
                 temp_g[x].remove(vert2)
                 temp_g[x].insert(ind,vert1)
-
             elif y == vert1:
                 ind = temp_g[x].index(vert1)
                 temp_g[x].remove(vert1)
                 temp_g[x].insert(ind,vert2)
 
-
     x1 = temp_g[vert1]
     x2 = temp_g[vert2]
+    
     for i in temp_g:
         if i == vert1:
             temp_g[vert2] = x1
         elif i == vert2:
             temp_g[vert1] = x2
-
 
     return temp_g
 
@@ -68,7 +64,6 @@ def list_perm(list,step = 0):
         print ("".join(list))
 
     for i in range(step, len(list)):
-
         lst_temp= [character for character in list]
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
         list_perm(lst_temp, step + 1)
