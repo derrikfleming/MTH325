@@ -31,7 +31,6 @@ def is_same(list1, list2):
 
 def switch(graph,vert1,vert2):
     temp_g = graph
-    print(graph)
 
 
     for x in list(temp_g):
@@ -60,7 +59,7 @@ def switch(graph,vert1,vert2):
     return temp_g
 
 
-print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
+#print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
 
 
 
@@ -74,3 +73,16 @@ def list_perm(list,step = 0):
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
         list_perm(lst_temp, step + 1)
 #list_perm(["A","B","C"])
+
+
+
+def is_iso(graph1,graph2):
+
+    for (x,y) in zip(graph1,graph2):
+        if len(graph1[x]) == len(graph2[y]):
+            print len(graph1[x])
+            return True
+
+
+
+print(is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
