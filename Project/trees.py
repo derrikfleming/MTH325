@@ -217,30 +217,40 @@ def min_prim(graph):
     mst = []
     temp_graph = {}
     temp_graph2 = {}
+    # initialize temps to hold empty lists []
     for g in graph:
         temp_graph[g] = []
         temp_graph2[g] = []
+    # add the first edge to the mst and temp graphs
+    mst.append(prims_g[0])
+    temp_graph2[prims_g[0][0]] += prims_g[0][1]
+    temp_graph2[prims_g[0][1]] += prims_g[0][0]
+    temp_graph = deepcopy(temp_graph2)
+    # remove first edge from edgelist
+    prims_g.pop()
     # delete edges in prims_g if added to mst until either there is nothing left or
     # the only edges we can add create cycles
-    mst.append(prims_g[0])
-    prims_g.pop()
     while(len(prims_g)>0):
         check = False
         count = 0
+        # loop through the edges to find the next one to add
         for edge in prims_g:
             count += 1
+            # loop through mst to see if the current edge to add contains a vertex currently in the mst
             for x in mst:
                 print(edge,x)
+                # if there is an edge that has a vertex part of the current mst add it to the temp and make sure it doesnt create a cycle
                 if edge[0] in x or edge[1] in x:
                     temp_graph2[edge[0]] += edge[1]
                     temp_graph2[edge[1]] += edge[0]
-                    print(edge, x)
+                    # if no cycle is made, commit it to the other temp and add that edge to mst and remove it from the edgelist
                     if is_cycle(temp_graph2, edge[0], edge[0], edge[0], []) == False:
                         temp_graph = deepcopy(temp_graph2)
                         mst.append(edge)
                         prims_g.pop()
                         check = True
                         break
+                    # if it does make a cycle, undo that edge
                     else:
                         check = False
                         temp_graph2 = deepcopy(temp_graph)
