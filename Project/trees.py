@@ -171,19 +171,6 @@ def edge_get(graph):
 #tree = {"A" : [["B", 10], ["D", 5]], "B" : [["A", 10], ["C",5]], "C" : [["B", 5], ["D", 15]], "D" : [["C", 15], ["A", 5]]}
 #print(edge_get(tree))
 
-#NOT WORKING!
-# def is_cycle(temp_graph,original_vertex, current, prev):
-#     cycle = False
-#     for edge in temp_graph:
-#         if edge == current:
-#             for vertex in edge:
-#                 if vertex == original_vertex and vertex != prev:
-#                     print ("cycle")
-#                     return True
-#                 else:
-#                     cycle = cycle or is_cycle(temp_graph, original_vertex, vertex, edge)
-#     return cycle
-
 def is_cycle(temp_graph, original, current, prev, visited):
     result = False
 
@@ -204,11 +191,14 @@ def is_cycle(temp_graph, original, current, prev, visited):
 
 print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D","A"]}, "A", "A", "A",[]))
 
-from collections import defaultdict
+
 def min_kruskal(graph):
     kruskal_mst = []
-    temp_graph = defaultdict(list)
-    temp_graph2 = defaultdict(list)
+    temp_graph = {}
+    temp_graph2 = {}
+    for g in graph:
+        temp_graph[g] = []
+        temp_graph2[g] = []
 
     kruskel_g = edge_get(graph)
     for edge in kruskel_g:
@@ -222,24 +212,33 @@ def min_kruskal(graph):
     return kruskal_mst
 
 
-def min_prims(graph):
+def min_prim(graph):
     prims_g= edge_get(graph)
     mst = []
-    temp_graph = defaultdict(list)
-    temp_graph = defaultdict(list)
+    temp_graph = {}
+    temp_graph2 = {}
+    for g in graph:
+        temp_graph[g] = []
+        temp_graph2[g] = []
     # delete edges in prims_g if added to mst until either there is nothing left or
     # the only edges we can add create cycles
+    mst.append(prims_g[0])
+    prims_g.pop()
     while(len(prims_g)>0):
         check = False
+        count = 0
         for edge in prims_g:
+            count += 1
             for x in mst:
-                if vert in x:
+                print(edge,x)
+                if edge[0] in x or edge[1] in x:
                     temp_graph2[edge[0]] += edge[1]
                     temp_graph2[edge[1]] += edge[0]
-                    if is_cycle(temp_graph2, edge[0], edge[[0], egde[0], []) == False:
+                    print(edge, x)
+                    if is_cycle(temp_graph2, edge[0], edge[0], edge[0], []) == False:
                         temp_graph = deepcopy(temp_graph2)
                         mst.append(edge)
-                        prims_g.delete(vert)
+                        prims_g.pop()
                         check = True
                         break
                     else:
@@ -247,8 +246,9 @@ def min_prims(graph):
                         temp_graph2 = deepcopy(temp_graph)
             if check == True:
                 break
-        else:
+        if count == len(prims_g):
             break
     return mst
 tree = {"A":[["B", 10], ["D",5]], "B":[["A",10], ["C",5]], "C":[["B",5], ["D",15]], "D":[["C",15], ["A",5]]}
-print(min_prims(tree))
+print(min_kruskal(tree))
+print(min_prim(tree))
