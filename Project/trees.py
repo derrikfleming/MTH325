@@ -189,7 +189,7 @@ def is_cycle(temp_graph, original, current, prev, visited):
     return result
 
 
-print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D","A"]}, "A", "A", "A",[]))
+#print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D","A"]}, "A", "A", "A",[]))
 
 
 def min_kruskal(graph):
@@ -227,18 +227,18 @@ def min_prim(graph):
     temp_graph2[prims_g[0][1]] += prims_g[0][0]
     temp_graph = deepcopy(temp_graph2)
     # remove first edge from edgelist
-    prims_g.pop()
+    print(prims_g)
+    prims_g.pop(0)
     # delete edges in prims_g if added to mst until either there is nothing left or
     # the only edges we can add create cycles
     while(len(prims_g)>0):
         check = False
         count = 0
+        length = len(prims_g)
         # loop through the edges to find the next one to add
         for edge in prims_g:
-            count += 1
             # loop through mst to see if the current edge to add contains a vertex currently in the mst
             for x in mst:
-                print(edge,x)
                 # if there is an edge that has a vertex part of the current mst add it to the temp and make sure it doesnt create a cycle
                 if edge[0] in x or edge[1] in x:
                     temp_graph2[edge[0]] += edge[1]
@@ -247,7 +247,7 @@ def min_prim(graph):
                     if is_cycle(temp_graph2, edge[0], edge[0], edge[0], []) == False:
                         temp_graph = deepcopy(temp_graph2)
                         mst.append(edge)
-                        prims_g.pop()
+                        prims_g.remove(edge)
                         check = True
                         break
                     # if it does make a cycle, undo that edge
@@ -256,9 +256,11 @@ def min_prim(graph):
                         temp_graph2 = deepcopy(temp_graph)
             if check == True:
                 break
-        if count == len(prims_g):
+        if count == length:
             break
     return mst
+
+tree1 = {"A":[["E", 15], ["C",5]], "B":[["E",10], ["D",15]], "C":[["A",5], ["D",10], ["E",5]], "D":[["C",10], ["B",15]], "E": [["C",5],["B",10],["A",15]]}
 tree = {"A":[["B", 10], ["D",5]], "B":[["A",10], ["C",5]], "C":[["B",5], ["D",15]], "D":[["C",15], ["A",5]]}
-print(min_kruskal(tree))
-print(min_prim(tree))
+#print(min_kruskal(tree))
+print(min_prim(tree1))
