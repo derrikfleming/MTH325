@@ -45,7 +45,7 @@ def switch(graph,vert1,vert2):
 
     x1 = temp_g[vert1]
     x2 = temp_g[vert2]
-    
+
     for i in temp_g:
         if i == vert1:
             temp_g[vert2] = x1
@@ -72,12 +72,21 @@ def list_perm(list,step = 0):
 
 
 def is_iso(graph1,graph2):
+    temp_g1 = []
+    g1 = {}
+    g1 = graph1
 
-    for (x,y) in zip(graph1,graph2):
-        if len(graph1[x]) == len(graph2[y]):
-            print len(graph1[x])
-            return True
+    for x in graph1:
+        for g in graph2:
+            if len(graph1[x]) == len(graph2[g]):
+                print(len(graph1[x]))
+                temp_g1.append(g)
+                print(temp_g1)
+
+    if len(temp_g1) == len(g1):
+        return True
+    else:
+        return False
 
 
-
-print(is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
+print (is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
