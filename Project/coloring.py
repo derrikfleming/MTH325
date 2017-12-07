@@ -58,9 +58,7 @@ print("Is proper edge: " , is_proper_edge(g))
 
 def greedy(graph,order):
 	color = {}
-	for x in graph:
-		color[x] = 1
-		break
+	color[order[0]] = 1
 	for vert in order:
 		check = False
 		color[vert] = 1
@@ -69,10 +67,12 @@ def greedy(graph,order):
 				if x in color:
 					if color[x] == color[vert]:
 						color[vert] += 1
+						break
 			else:
 				check = True
-	print ("COLOR", color)
+	return color
 
-ga = {"A":["B","C"],"B":["A", "C"],"C":["B","D","C"], "D":["C"]}
+ga = {"A":["B","C"],"B":["A", "C"],"C":["A","B","D"], "D":["C"]}
+order1 = ["C","D","A","B"]
 order = ["A","B","C","D"]
-greedy(ga,order)
+print( greedy(ga,order1))
