@@ -63,16 +63,16 @@ def greedy(graph,order):
 		check = False
 		color[vert] = 1
 		while(check != True):
-			for x in graph[vert]:
-				if x in color:
-					if color[x] == color[vert]:
+			for neighb in graph[vert]:
+				if neighb in color:
+					if color[neighbor] == color[vert]:
 						color[vert] += 1
 						break
 			else:
 				check = True
 	return color
 
-ga = {"A":["B","C"],"B":["A", "C"],"C":["A","B","D"], "D":["C"]}
+ga = {"A":["B","C","E","G"],"B":["A", "C","E","F","G"],"C":["F","A","B","D","G"], "D":["C","G"], "E":["A","B","G"],"F":["B","C","G"],"G":["A","B","C","D","E","F"]}
 order1 = ["C","D","A","B"]
-order = ["A","B","C","D"]
-print( greedy(ga,order1))
+order = ["A","E","B","C","F","D","G"]
+print( greedy(ga,order))

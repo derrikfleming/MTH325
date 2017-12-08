@@ -5,13 +5,16 @@ def is_same(list1, list2):
         for item in list1:
             if item not in list2:
                 is_same = False
+            else:
+                list2.remove(item)
+
     else:
         is_same = False
     return is_same
 
 #same size, same order
-#list1 = ["A", "B", "C"]
-#list2 = ["A", "B", "C"]
+#list1 = ["A", "C", "C"]
+#list2 = ["A", "A", "C"]
 #print(is_same(list1,list2)) #True
 
 #same size, different order
@@ -34,6 +37,9 @@ def switch(graph,vert1,vert2):
 
     for x in list(temp_g):
         for y in temp_g[x]:
+            # checks if the edge connected to the vertex x is what vert2 is
+            #if it is it removes it after getting its index and then adds vert1
+            #at that index
             if y == vert2:
                 ind = temp_g[x].index(vert2)
                 temp_g[x].remove(vert2)
@@ -45,7 +51,7 @@ def switch(graph,vert1,vert2):
 
     x1 = temp_g[vert1]
     x2 = temp_g[vert2]
-
+    #checks to see if that key is vert1 or vert2 and swaps the vertex
     for i in temp_g:
         if i == vert1:
             temp_g[vert2] = x1
@@ -56,42 +62,50 @@ def switch(graph,vert1,vert2):
 
 
 #print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
-
+"""
+Method that finds all permutations for the given list.
+"""
 g = []
 def list_perm(list,step = 0):
+    #adds each permutation to g
     if step == len(list):
         global g
         g +=([list])
-        #print ("".join(list))
 
     for i in range(step, len(list)):
         lst_temp= [character for character in list]
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
+        #recurses back through perm for the next character in the list.
         list_perm(lst_temp, step + 1)
     else:
         return g
 
-print(list_perm(["A","B","C"]))
+#print(list_perm(["A","B","C"]))
 
 def is_iso(graph1,graph2):
     temp_g1 = []
     g1 = {}
     g1 = graph1
+    result = True
 
-    for x in graph1:
-        for g in graph2:
-            if len(graph1[x]) == len(graph2[g]):
-                print(len(graph1[x]))
-                temp_g1.append(g)
-                print(temp_g1)
-
-    if len(temp_g1) == len(g1):
-
-        return True
+    if len(graph1.keys()) != len(graph2.keys()):
+        result = False
     else:
-        return False
+        degrees_g1 = []
+        degrees_g2 = []
+        for v1,v2 in zip(graph1,graph2):
+            degrees_g1.append(len(graph1[v1]))
+            degrees_g2.append(len(graph2[v2]))
+        print(degrees_g1, degrees_g2)
+        result = is_same(degrees_g1,degrees_g2)
+
+    return result
+
+graph1 = {"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}
+graph2 = {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}
+
+#graph3 = {"A" : ["B","C"], "B" : ["A", "C"], "C" : ["A","B"]}
+#graph4 = {"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}
 
 
-
-
-#print(is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
+print(is_iso(graph1,graph2))
