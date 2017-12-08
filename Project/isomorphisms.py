@@ -18,7 +18,7 @@ def is_same(list1, list2):
 
 def switch(graph,vert1,vert2):
     """
-    
+
     """
     temp_g = graph
 
@@ -72,7 +72,14 @@ def list_perm(list,step = 0):
 
 def is_iso(graph1,graph2):
     """
-
+        This method first checks if the number of keys in graph1 is
+        equal to the number of keys in graph2. If it is, it loops
+        through each, grabbing the length of the list associated with
+        each keys and appending the value to a separate list for both
+        graph1 and graph2. Each degree count list is passed to the
+        is_same function and the result is stored in the returned
+        variable.
+        
         Parameters:
         --------------
         graph1 : dictionary
@@ -88,16 +95,18 @@ def is_iso(graph1,graph2):
     g1 = {}
     g1 = graph1
     result = True
-
+    #check key count
     if len(graph1.keys()) != len(graph2.keys()):
         result = False
+    #key count equivalent
     else:
         degrees_g1 = []
         degrees_g2 = []
+        #get degree count
         for v1,v2 in zip(graph1,graph2):
             degrees_g1.append(len(graph1[v1]))
             degrees_g2.append(len(graph2[v2]))
-        print(degrees_g1, degrees_g2)
+        #compare degree counts
         result = is_same(degrees_g1,degrees_g2)
 
     return result

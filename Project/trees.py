@@ -171,7 +171,13 @@ def is_cycle(temp_graph, original, current, prev, visited):
 
 def min_kruskal(graph):
     """
-
+        The method works by getting a list of all edges in graph
+        in non-decreasing order, creating 2 temporary dictionaries, and
+        a list to return. On each iteration an edge gets added to
+        temp_graph2, it is then passed to is_cycle to see if there is
+        a cycle that exists. If there is a cycle that exists the edge
+        is removed, if not it is added to temp_graph. The resulting
+        list of edges is returned.
 
         Parameters:
         --------------
