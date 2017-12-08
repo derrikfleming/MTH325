@@ -10,13 +10,6 @@ def is_proper(graph,color):
 				return False
 	return True
 
-grapha = {"A" : ["B", "C"], "B" : ["A", "C"], "C" : ["A", "B"]}
-colora = {"A" : 1, "B" : 2, "C" : 3}
-colorb = {"A" : 1, "B" : 1, "C" : 3}
-boola = is_proper(grapha, colora)
-boolb = is_proper(grapha, colorb)
-print ("Is_proper: " , boola, boolb)
-
 """
 This method returns all possible vertex colorings of a graph. Does not distinguish
 between proper and non-proper colorings.
@@ -43,9 +36,6 @@ def three_color(graph):
 				temp[vert] = 1
 	return final
 
-graphb = {"A":["B", "C"],"B":["A","C"],"C":["A","B"]}
-print("Three color: " , three_color(graphb))
-
 """
 This method determines if the inputed graph's vertices can be colored with only
 three colors.
@@ -61,9 +51,6 @@ def is_three_color(graph):
 			return True
 	return False
 
-graphc = {"A":["B","C","D"],"B":["A","C","D"],"C":["A","B","D"], "D":["A","B","C"]}
-print("Is_three_color: " , is_three_color(graphc))
-
 """
 This method determines if a graph has a proper edge coloring>
 """
@@ -76,9 +63,6 @@ def is_proper_edge(graph):
 				if l[0] != vert and l[1] == edge[1]:
 					return False
 	return True
-
-g = {"A" : [["B", 1], ["C", 2]], "B" : [["A", 1], ["C", 3]],"C" : [["A", 2], ["B", 3]]}
-print("Is proper edge: " , is_proper_edge(g))
 
 """
 This method performs the greedy algorithm to find the a proper vertex coloring
@@ -103,8 +87,3 @@ def greedy(graph,order):
 		while(color[vert] in neighborColors):
 			color[vert] += 1
 	return color
-
-ga = {"A":["B","C","E","G"],"B":["A", "C","E","F","G"],"C":["F","A","B","D","G"], "D":["C","G"], "E":["A","B","G"],"F":["B","C","G"],"G":["A","B","C","D","E","F"]}
-order1 = ["C","D","A","B"]
-order = ["A","E","B","C","F","D","G"]
-print( greedy(ga,order))
