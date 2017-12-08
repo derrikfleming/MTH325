@@ -75,7 +75,6 @@ def greedy(graph,order):
 	color[order[0]] = 1
 	# loops through the oder and adds it to the color dict with a color of 1
 	for vert in order:
-		check = False
 		color[vert] = 1
 		# goes through the adjacent vertices that have already been colored and
 		# adds their color to a list, then while the current color is the same
