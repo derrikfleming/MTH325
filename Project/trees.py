@@ -186,11 +186,15 @@ def min_kruskal(graph):
     kruskal_mst = []
     temp_graph = {}
     temp_graph2 = {}
+
+    #init temp dicts with key values
     for g in graph:
         temp_graph[g] = []
         temp_graph2[g] = []
-
+    #get edges in graph
     kruskal_g = edge_get(graph)
+
+    
     for edge in kruskal_g:
         temp_graph2[edge[0]] += edge[1]
         temp_graph2[edge[1]] += edge[0]
