@@ -34,20 +34,6 @@ def DFS(tree,vertex="A"):
 
     return dfs_list
 
-# A TEST CASE
-#           A
-#         / | \
-#        B  C  D
-#      / |  |   \
-#     E  F  G    H
-#      / | \
-#     I  J  K
-#
-
-#tree = {"A":["B", "C", "D"],"B":["E","F"], "C" : ["G"], "D" : ["H"], "E" : [], "F" : ["I","J","K"], "G" : [], "H" : [], "I" : [], "J" : [], "K" : []}
-#print(DFS(tree))
-#A,B,E,F,I,J,K,C,G,D,H
-
 def BFS(tree,level=["A"]):
     """
     This method provides a BFS traversal of the tree parameter
@@ -82,21 +68,6 @@ def BFS(tree,level=["A"]):
             sub_level += tree[vertex]
         bfs_list += BFS(tree,sub_level)
     return bfs_list
-
-# A TEST CASE
-#            ___A___
-#           /       \
-#          C         D
-#        / | \     / | \
-#       P  R  L   F  Q  S
-#         / \       / \
-#        O   E     G   H
-#                 / \
-#                N   M
-#
-#tree = {"A" : ["C", "D"], "C" : ["P","R","L"],"R" : ["O","E"],"P" : [], "L" : [], "N" : [], "M" : [], "H" : [], "S" : [], "F" : [], "O" : [], "E": [], "G" : ["N", "M"], "Q" : ["G", "H"], "D" : ["F", "Q", "S"]}
-#print(BFS(tree))
-#A,C,D,P,R,L,F,Q,S,O,E,G,H,N,M
 
 #from isomorphisms
 def is_same(list1, list2):
@@ -160,18 +131,28 @@ def edge_get(graph):
                             weights.append(adj_edge[1])
     return edge_list
 
-#
-#           A
-#      10  / \  5
-#         B   D
-#     5  /___/  15
-#       C
-#
-#
-#tree = {"A" : [["B", 10], ["D", 5]], "B" : [["A", 10], ["C",5]], "C" : [["B", 5], ["D", 15]], "D" : [["C", 15], ["A", 5]]}
-#print(edge_get(tree))
-
 def is_cycle(temp_graph, original, current, prev, visited):
+    """
+        A recursive solution to identifying cycles where a temporary
+        graph is passed in, a starting point, the current vertex being
+        examined, the previous vertex examined, and a list of vertexes
+        on the current path. At each recursive iteration it checks to
+        make sure that the current vertex is not being mapped back onto
+        the original.
+
+        Parameters:
+        --------------
+        temp_graph : dictionary
+        original : string
+        current : string
+        prev : string
+        visited : string
+
+        Returns:
+        --------------
+        list
+    """
+
     result = False
 
     if len(temp_graph[current]) == 1:
@@ -188,11 +169,20 @@ def is_cycle(temp_graph, original, current, prev, visited):
                 break
     return result
 
-
-#print(is_cycle({"A":["B","D"], "B":["A","C"], "C":["B","D"],"D":["C", "L"], "L":["D","A"]}, "A", "A", "A",[]))
-
-
 def min_kruskal(graph):
+    """
+
+        Parameters:
+        --------------
+        graph : dictionary
+
+
+        Returns:
+        --------------
+        list
+
+    """
+
     kruskal_mst = []
     temp_graph = {}
     temp_graph2 = {}
@@ -200,11 +190,11 @@ def min_kruskal(graph):
         temp_graph[g] = []
         temp_graph2[g] = []
 
-    kruskel_g = edge_get(graph)
-    for edge in kruskel_g:
+    kruskal_g = edge_get(graph)
+    for edge in kruskal_g:
         temp_graph2[edge[0]] += edge[1]
         temp_graph2[edge[1]] += edge[0]
-        if is_cycle(temp_graph2, edge[0], edge[0], edge[0], []) == False:
+        if is_cycle(temp_graph2,edge[0],edge[0],edge[0],[]) == False:
             temp_graph = deepcopy(temp_graph2)
             kruskal_mst.append(edge)
         else:
@@ -213,6 +203,19 @@ def min_kruskal(graph):
 
 
 def min_prim(graph):
+    """
+
+        Parameters:
+        --------------
+        graph : dictionary
+
+
+        Returns:
+        --------------
+        list
+
+    """
+
     prims_g= edge_get(graph)
     mst = []
     temp_graph = {}
@@ -254,8 +257,3 @@ def min_prim(graph):
             if check == True:
                 break
     return mst
-
-tree1 = {"A":[["E", 15], ["C",5]], "B":[["E",10], ["D",15]], "C":[["A",5], ["D",10], ["E",5]], "D":[["C",10], ["B",15]], "E": [["C",5],["B",10],["A",15]]}
-tree = {"A":[["B", 10], ["D",5]], "B":[["A",10], ["C",5]], "C":[["B",5], ["D",15]], "D":[["C",15], ["A",5]]}
-print(min_kruskal(tree1))
-print(min_prim(tree1))

@@ -1,4 +1,8 @@
 def is_same(list1, list2):
+    """
+
+    """
+
     is_same = True
 
     if len(list1) == len(list2):
@@ -12,27 +16,10 @@ def is_same(list1, list2):
         is_same = False
     return is_same
 
-#same size, same order
-#list1 = ["A", "C", "C"]
-#list2 = ["A", "A", "C"]
-#print(is_same(list1,list2)) #True
-
-#same size, different order
-#list1 = ["A", "B", "C"]
-#list2 = ["B", "C", "A"]
-#print(is_same(list1,list2)) #True
-
-#different size, different contents
-#list1 = ["A", "B", "C"]
-#list2 = ["B", "C", "A", "D"]
-#print(is_same(list1,list2)) #False
-
-#same size, different contents
-#list1 = ["A", "B", "C"]
-#list2 = ["D", "E", "F"]
-#print(is_same(list1,list2)) #False
-
 def switch(graph,vert1,vert2):
+    """
+    
+    """
     temp_g = graph
 
     for x in list(temp_g):
@@ -62,11 +49,12 @@ def switch(graph,vert1,vert2):
 
 
 #print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
-"""
-Method that finds all permutations for the given list.
-"""
+
 g = []
 def list_perm(list,step = 0):
+    """
+    Method that finds all permutations for the given list.
+    """
     #adds each permutation to g
     if step == len(list):
         global g
@@ -83,6 +71,19 @@ def list_perm(list,step = 0):
 #print(list_perm(["A","B","C"]))
 
 def is_iso(graph1,graph2):
+    """
+
+        Parameters:
+        --------------
+        graph1 : dictionary
+        graph2 : dictionary
+
+        Returns:
+        --------------
+        boolean
+            True if isomorphic, False if not
+    """
+
     temp_g1 = []
     g1 = {}
     g1 = graph1
@@ -100,12 +101,3 @@ def is_iso(graph1,graph2):
         result = is_same(degrees_g1,degrees_g2)
 
     return result
-
-graph1 = {"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}
-graph2 = {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}
-
-#graph3 = {"A" : ["B","C"], "B" : ["A", "C"], "C" : ["A","B"]}
-#graph4 = {"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}
-
-
-print(is_iso(graph1,graph2))
