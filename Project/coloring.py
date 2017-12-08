@@ -11,7 +11,6 @@ def is_proper(graph,color):
 				return False
 	return True
 
-<<<<<<< HEAD
 grapha = {"A" : ["B", "C"], "B" : ["A", "C"], "C" : ["A", "B"]}
 colora = {"A" : 1, "B" : 2, "C" : 3}
 colorb = {"A" : 1, "B" : 1, "C" : 3}
@@ -20,12 +19,6 @@ boolb = is_proper(grapha, colorb)
 print ("Is_proper: " , boola, boolb)
 
 
-=======
-"""
-This method returns all possible vertex colorings of a graph. Does not distinguish
-between proper and non-proper colorings.
-"""
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 def three_color(graph):
 	"""
 	This method returns all possible vertex colorings of a graph. Does
@@ -52,17 +45,10 @@ def three_color(graph):
 				temp[vert] = 1
 	return final
 
-<<<<<<< HEAD
 graphb = {"A":["B", "C"],"B":["A","C"],"C":["A","B"]}
 print("Three color: " , three_color(graphb))
 
 
-=======
-"""
-This method determines if the inputed graph's vertices can be colored with only
-three colors.
-"""
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 def is_three_color(graph):
 	"""
 	This method determines if the inputed graph's vertices can be
@@ -78,16 +64,10 @@ def is_three_color(graph):
 			return True
 	return False
 
-<<<<<<< HEAD
 graphc = {"A":["B","C","D"],"B":["A","C","D"],"C":["A","B","D"], "D":["A","B","C"]}
 print("Is_three_color: " , is_three_color(graphc))
 
 
-=======
-"""
-This method determines if a graph has a proper edge coloring>
-"""
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 def is_proper_edge(graph):
 	"""
 	This method determines if a graph has a proper edge coloring>
@@ -101,17 +81,10 @@ def is_proper_edge(graph):
 					return False
 	return True
 
-<<<<<<< HEAD
 g = {"A" : [["B", 1], ["C", 2]], "B" : [["A", 1], ["C", 3]],"C" : [["A", 2], ["B", 3]]}
 print("Is proper edge: " , is_proper_edge(g))
 
 
-=======
-"""
-This method performs the greedy algorithm to find the a proper vertex coloring
-of a graph given an order.
-"""
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 def greedy(graph,order):
 	"""
 	This method performs the greedy algorithm to find the a proper vertex coloring
@@ -123,24 +96,21 @@ def greedy(graph,order):
 	color[order[0]] = 1
 	# loops through the oder and adds it to the color dict with a color of 1
 	for vert in order:
+		check = False
 		color[vert] = 1
-<<<<<<< HEAD
 		# goes through the adjacent vertices and adds their color to a list
 		# then while the current color is the same as any of the neighboring vertices
 		# it increments it up one
-=======
-		# goes through the adjacent vertices that have already been colored and
-		# adds their color to a list, then while the current color is the same
-		# as any of the neighboring vertices it increments it up one
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 		neighborColors = []
 		for neighbor in graph[vert]:
 			if neighbor in color:
 				neighborColors.append(color[neighbor])
 		while(color[vert] in neighborColors):
 			color[vert] += 1
-<<<<<<< HEAD
 
-=======
->>>>>>> 06ce6021203a843f53a718b1c4aaf5a2d81b99d5
 	return color
+
+ga = {"A":["B","C","E","G"],"B":["A", "C","E","F","G"],"C":["F","A","B","D","G"], "D":["C","G"], "E":["A","B","G"],"F":["B","C","G"],"G":["A","B","C","D","E","F"]}
+order1 = ["C","D","A","B"]
+order = ["A","E","B","C","F","D","G"]
+print( greedy(ga,order))

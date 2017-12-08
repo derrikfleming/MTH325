@@ -172,6 +172,7 @@ def is_cycle(temp_graph, original, current, prev, visited):
 def min_kruskal(graph):
     """
 
+
         Parameters:
         --------------
         graph : dictionary
@@ -194,7 +195,6 @@ def min_kruskal(graph):
     #get edges in graph
     kruskal_g = edge_get(graph)
 
-    
     for edge in kruskal_g:
         temp_graph2[edge[0]] += edge[1]
         temp_graph2[edge[1]] += edge[0]
@@ -208,11 +208,12 @@ def min_kruskal(graph):
 
 def min_prim(graph):
     """
+        Due to the length of this method, please refer to inline
+        comments.
 
         Parameters:
         --------------
         graph : dictionary
-
 
         Returns:
         --------------
