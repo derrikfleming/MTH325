@@ -57,19 +57,21 @@ def switch(graph,vert1,vert2):
 
 #print (switch({"A" : ["B", "C"], "B" : ["A", "D"], "C" : ["A", "D"], "D" : ["B", "C"]}, "A", "C"))
 
-
-
+g = []
 def list_perm(list,step = 0):
     if step == len(list):
-        print ("".join(list))
+        global g
+        g +=([list])
+        #print ("".join(list))
 
     for i in range(step, len(list)):
         lst_temp= [character for character in list]
         lst_temp[step], lst_temp[i] = lst_temp[i], lst_temp[step]
         list_perm(lst_temp, step + 1)
-#list_perm(["A","B","C"])
+    else:
+        return g
 
-
+print(list_perm(["A","B","C"]))
 
 def is_iso(graph1,graph2):
     temp_g1 = []
@@ -84,9 +86,12 @@ def is_iso(graph1,graph2):
                 print(temp_g1)
 
     if len(temp_g1) == len(g1):
+
         return True
     else:
         return False
 
 
-print (is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
+
+
+#print(is_iso({"A" : ["B","C"], "B" : ["A"], "C" : ["A"]}, {"A" : ["B"], "B" : ["A", "C"], "C" : ["B"]}))
