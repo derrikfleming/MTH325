@@ -93,28 +93,15 @@ def greedy(graph,order):
 	for vert in order:
 		check = False
 		color[vert] = 1
-		# goes through the adjacent vertices and adds their color to a list
-		# then while the current color is the same as any of the neighboring vertices
-		# it increments it up one
-
-		# added from here
+		# goes through the adjacent vertices that have already been colored and
+		# adds their color to a list, then while the current color is the same
+		# as any of the neighboring vertices it increments it up one
 		neighborColors = []
 		for neighbor in graph[vert]:
 			if neighbor in color:
 				neighborColors.append(color[neighbor])
 		while(color[vert] in neighborColors):
 			color[vert] += 1
-		# to here
-
-		# took this out
-		# while(check != True):
-		# 	for neighbor in graph[vert]:
-		# 		if neighbor in color:
-		# 			if color[neighbor] == color[vert]:
-		# 				color[vert] += 1
-		# 				break
-		# 	else:
-		# 		check = True
 	return color
 
 ga = {"A":["B","C","E","G"],"B":["A", "C","E","F","G"],"C":["F","A","B","D","G"], "D":["C","G"], "E":["A","B","G"],"F":["B","C","G"],"G":["A","B","C","D","E","F"]}
